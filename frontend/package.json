@@ -12,15 +12,19 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.2",
     "@tailwindcss/vite": "^4.2.4",
+    "and": "^0.0.3",
     "axios": "^1.15.2",
+    "build": "^0.1.4",
     "framer-motion": "^12.38.0",
     "lucide-react": "^1.8.0",
+    "npm": "^11.13.0",
     "postman-request": "^2.88.1-postman.48",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-hot-toast": "^2.6.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.14.2",
+    "run": "^1.5.0",
     "tailwindcss": "^4.2.4"
   },
   "devDependencies": {

@@ -40,7 +40,7 @@ const Dashboard = () => {
             itemName: item.itemName, description: item.description, type: item.type,
             location: item.location, date: item.date ? item.date.split('T')[0] : '', contactInfo: item.contactInfo,
         });
-        setPreviewUrl(item.imageUrl ? `http://localhost:5000${item.imageUrl}` : null);
+        setPreviewUrl(item.imageUrl ? `${import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:5000'}${item.imageUrl}` : null);
         setIsModalOpen(true);
     };
 
@@ -106,7 +106,7 @@ const Dashboard = () => {
                     <div key={item._id} className="item-card glass-card group border-white/[0.03] hover:border-white/[0.08] bg-[#0c0c0c]">
                         <div className="relative h-56 overflow-hidden rounded-t-xl">
                             <img 
-                                src={item.imageUrl ? `http://localhost:5000${item.imageUrl}` : 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop'} 
+                                src={item.imageUrl ? `${import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:5000'}${item.imageUrl}` : 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop'} 
                                 alt={item.itemName} 
                                 className="w-full h-full object-cover grayscale-[0.2] transition-transform duration-700 group-hover:scale-105 group-hover:grayscale-0"
                             />

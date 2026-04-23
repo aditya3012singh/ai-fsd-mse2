@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { registerUser, resetError } from '../features/auth/authSlice';
+import toast from 'react-hot-toast';
 
 const Register = () => {
     const [formData, setFormData] = useState({ name: '', email: '', password: '' });
@@ -11,9 +12,18 @@ const Register = () => {
     const { isAuthenticated, loading, error } = useSelector((state) => state.auth);
 
     useEffect(() => {
-        if (isAuthenticated) navigate('/');
-        return () => dispatch(resetError());
-    }, [isAuthenticated, navigate, dispatch]);
+        if (isAuthenticated) {
+            toast.success('Account created successfully!');
+            navigate('/');
+        }
+    }, [isAuthenticated, navigate]);
+
+    useEffect(() => {
+        if (error) {
+            toast.error(error);
+            dispatch(resetError());
+        }
+    }, [error, dispatch]);
 
     const onSubmit = (e) => {
         e.preventDefault();

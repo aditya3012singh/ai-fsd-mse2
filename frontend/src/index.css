@@ -1,32 +1,32 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #6366f1;
+  --color-primary: #f8fafc;
   --color-bg-matte: #050505;
-  --color-card-matte: #111111;
-  --color-border-charcoal: #222222;
+  --color-card-matte: #0c0c0c;
+  --color-border-charcoal: #1a1a1a;
 }
 
 @layer base {
   body {
-    @apply bg-[var(--color-bg-matte)] text-slate-100 min-h-screen selection:bg-indigo-500/30;
+    @apply bg-[var(--color-bg-matte)] text-slate-100 min-h-screen selection:bg-white/20;
     background-image: 
-      radial-gradient(at 0% 0%, rgba(20, 20, 20, 0.8) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, rgba(10, 10, 10, 0.8) 0px, transparent 50%);
+      radial-gradient(at 0% 0%, rgba(30, 30, 30, 0.4) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(15, 15, 15, 0.4) 0px, transparent 50%);
   }
 }
 
 @layer components {
   .glass-card {
-    @apply bg-[var(--color-card-matte)] border border-[var(--color-border-charcoal)] rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.5)] transition-all duration-300;
+    @apply bg-[var(--color-card-matte)] border border-[var(--color-border-charcoal)] rounded-xl shadow-[0_8px_40px_rgb(0,0,0,0.8)] transition-all duration-300;
   }
   
   .btn {
-    @apply px-5 py-2.5 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2 active:scale-95 cursor-pointer;
+    @apply px-5 py-2.5 rounded-lg font-bold transition-all duration-300 flex items-center justify-center gap-2 active:scale-95 cursor-pointer;
   }
   
   .btn-primary {
-    @apply bg-indigo-600 text-white hover:bg-indigo-500 hover:shadow-[0_0_20px_rgba(99,102,241,0.3)];
+    @apply bg-slate-100 text-black hover:bg-white hover:shadow-[0_0_25px_rgba(255,255,255,0.15)];
   }
   
   .btn-outline {

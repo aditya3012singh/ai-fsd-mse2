@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchItems, searchItems, addItem, deleteItem, updateItem } from '../features/items/itemSlice';
 import { Search, Plus, MapPin, Calendar, Phone, Edit, Trash2, X, Camera } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 const Dashboard = () => {
     const dispatch = useDispatch();
@@ -43,15 +44,35 @@ const Dashboard = () => {
         setIsModalOpen(true);
     };
 
-    const onFormSubmit = (e) => {
+    const onFormSubmit = async (e) => {
         e.preventDefault();
         const data = new FormData();
         Object.keys(formData).forEach(key => data.append(key, formData[key]));
         if (selectedFile) data.append('image', selectedFile);
 
-        if (editMode) dispatch(updateItem({ id: selectedItem._id, itemData: data }));
-        else dispatch(addItem(data));
-        setIsModalOpen(false);
+        try {
+            if (editMode) {
+                await dispatch(updateItem({ id: selectedItem._id, itemData: data })).unwrap();
+                toast.success('Report updated successfully');
+            } else {
+                await dispatch(addItem(data)).unwrap();
+                toast.success('Item reported successfully!');
+            }
+            setIsModalOpen(false);
+        } catch (error) {
+            toast.error(error);
+        }
+    };
+
+    const handleDelete = async (id) => {
+        if (window.confirm('Delete this report?')) {
+            try {
+                await dispatch(deleteItem(id)).unwrap();
+                toast.success('Report removed');
+            } catch (error) {
+                toast.error(error);
+            }
+        }
     };
 
     return (
@@ -69,11 +90,11 @@ const Dashboard = () => {
 
             <div className="mb-10">
                 <div className="relative group">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-500 transition-colors" size={20} />
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-slate-200 transition-colors" size={20} />
                     <input 
                         type="text" 
                         placeholder="Search items by name..." 
-                        className="w-full pl-12 pr-5 py-4 bg-white/5 border border-white/10 rounded-2xl outline-none focus:border-indigo-500 transition-all shadow-inner"
+                        className="w-full pl-12 pr-5 py-4 bg-white/5 border border-white/[0.03] rounded-2xl outline-none focus:border-white/10 transition-all shadow-inner"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
@@ -119,7 +140,7 @@ const Dashboard = () => {
                                         <Edit size={16} />
                                         <span>Edit</span>
                                     </button>
-                                    <button onClick={() => window.confirm('Delete?') && dispatch(deleteItem(item._id))} className="btn bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500 hover:text-white transition-all p-2 rounded-lg">
+                                    <button onClick={() => handleDelete(item._id)} className="btn bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500 hover:text-white transition-all p-2 rounded-lg">
                                         <Trash2 size={16} />
                                     </button>
                                 </div>

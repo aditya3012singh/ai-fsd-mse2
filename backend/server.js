@@ -23,6 +23,10 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api', require('./routes/authRoutes'));
 app.use('/api/items', require('./routes/itemRoutes'));
 
+app.get('/', (req, res) => {
+    res.send('Lost & Found API is running correctly.');
+});
+
 // Error handler (simple)
 app.use((err, req, res, next) => {
     const statusCode = res.statusCode === 200 ? 500 : res.statusCode;

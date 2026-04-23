@@ -41,11 +41,11 @@ const Login = () => {
                 <form onSubmit={onSubmit}>
                     <div className="mb-5">
                         <label className="block mb-2 text-slate-400 text-sm">Email Address</label>
-                        <input className="input-field" type="email" name="email" value={email} onChange={(e) => setFormData({...formData, email: e.target.value})} placeholder="Enter email" required />
+                        <input className="input-field" type="email" name="email" value={email} onChange={(e) => setFormData({...formData, email: e.target.value})} placeholder="Enter email" required autoComplete="email" />
                     </div>
                     <div className="mb-5">
                         <label className="block mb-2 text-slate-400 text-sm">Password</label>
-                        <input className="input-field" type="password" name="password" value={password} onChange={(e) => setFormData({...formData, password: e.target.value})} placeholder="Enter password" required />
+                        <input className="input-field" type="password" name="password" value={password} onChange={(e) => setFormData({...formData, password: e.target.value})} placeholder="Enter password" required autoComplete="current-password" />
                     </div>
                     <button type="submit" className="btn btn-primary w-full" disabled={loading}>
                         {loading ? 'Logging in...' : 'Login'}

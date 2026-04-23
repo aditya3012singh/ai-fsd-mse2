@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #6366f1;
+  --color-bg-matte: #050505;
+  --color-card-matte: #111111;
+  --color-border-charcoal: #222222;
+}
+
+@layer base {
+  body {
+    @apply bg-[var(--color-bg-matte)] text-slate-100 min-h-screen selection:bg-indigo-500/30;
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(20, 20, 20, 0.8) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(10, 10, 10, 0.8) 0px, transparent 50%);
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-[var(--color-card-matte)] border border-[var(--color-border-charcoal)] rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.5)] transition-all duration-300;
+  }
+  
+  .btn {
+    @apply px-5 py-2.5 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2 active:scale-95 cursor-pointer;
+  }
+  
+  .btn-primary {
+    @apply bg-indigo-600 text-white hover:bg-indigo-500 hover:shadow-[0_0_20px_rgba(99,102,241,0.3)];
+  }
+  
+  .btn-outline {
+    @apply bg-transparent border border-white/5 text-slate-400 hover:text-white hover:bg-white/5;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 bg-[#0a0a0a] border border-[#1a1a1a] rounded-lg text-slate-200 outline-none focus:border-indigo-500/50 transition-all placeholder:text-slate-600;
+  }
+}
+
+/* Custom Scrollbar for Matte Theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+::-webkit-scrollbar-thumb {
+  background: #222;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #333;
+}
